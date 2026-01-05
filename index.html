@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IIUC Saraswati Puja Invitation</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- External CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Countdown -->
+  <div id="countdown"></div>
+
+  <div class="container">
+    <!-- Hidden checkbox -->
+    <input type="checkbox" id="toggle">
+
+    <!-- Label acts as button -->
+    <label for="toggle" class="btn">এখানে ক্লিক করুন !</label>
+
+    <!-- Invitation Card -->
+    <div class="card">
+      <img src="1.png" alt="Invitation Image" class="zoomable">
+      <img src="3.png" alt="Invitation Image" class="zoomable">
+      <img src="2.png" alt="Invitation Image" class="zoomable">
+    </div>
+  </div>
+
+  <!-- Zoom overlay -->
+  <div id="overlay">
+    <img id="overlay-img" src="" alt="Zoomed Image">
+  </div>
+
+  <footer>
+    <p>- "© প্রীতম"</p>
+  </footer>
+
+  <!-- Countdown Script -->
+  <script>
+    // Set the date of your event
+    var eventDate = new Date("Jan 23, 2026 08:00:00").getTime();
+
+    var timer = setInterval(function() {
+      var now = new Date().getTime();
+      var distance = eventDate - now;
+
+      // Time calculations
+      var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      // Display result in landscape style
+      document.getElementById("countdown").innerHTML =
+        "<span>" + days + " Days</span> " +
+        "<span>" + hours + " Hours</span> " +
+        "<span>" + minutes + " Minutes</span> " +
+        "<span>" + seconds + " Seconds</span>";
+
+      // If countdown finished
+      if (distance < 0) {
+        clearInterval(timer);
+        document.getElementById("countdown").innerHTML = "🎉 Event Started!";
+      }
+    }, 1000);
+  </script>
+
+  <!-- Zoom-in Script -->
+  <script>
+    const zoomImages = document.querySelectorAll('.zoomable');
+    const overlay = document.getElementById('overlay');
+    const overlayImg = document.getElementById('overlay-img');
+
+    // Click to zoom in
+    zoomImages.forEach(img => {
+      img.addEventListener('click', () => {
+        overlay.style.display = 'flex';
+        overlayImg.src = img.src;
+      });
+    });
+
+    // Click overlay to close
+    overlay.addEventListener('click', () => {
+      overlay.style.display = 'none';
+    });
+
+    // Close with Esc key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === "Escape") {
+        overlay.style.display = 'none';
+      }
+    });
+  </script>
+</body>
+</html>
